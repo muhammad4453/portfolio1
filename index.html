@@ -1,0 +1,851 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+<title>Muhammad Masood Sarfraz – Analog IC Design & Lecturer</title>
+<link href="https://fonts.googleapis.com/css2?family=DM+Serif+Display:ital@0;1&family=DM+Sans:wght@300;400;500;600&display=swap" rel="stylesheet"/>
+<style>
+  :root {
+    --ink: #0f1117;
+    --ink-light: #3a3f50;
+    --ink-muted: #7a8099;
+    --bg: #f8f7f4;
+    --bg-alt: #eeecea;
+    --accent: #1a4fd6;
+    --accent-warm: #c84b1e;
+    --rule: #d8d5cf;
+    --card-bg: #ffffff;
+    --serif: 'DM Serif Display', Georgia, serif;
+    --sans: 'DM Sans', sans-serif;
+    --max: 1100px;
+  }
+
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+  html { scroll-behavior: smooth; }
+
+  body {
+    font-family: var(--sans);
+    background: var(--bg);
+    color: var(--ink);
+    font-size: 16px;
+    line-height: 1.65;
+    -webkit-font-smoothing: antialiased;
+  }
+
+  /* ── NAV ── */
+  nav {
+    position: fixed; top: 0; left: 0; right: 0; z-index: 100;
+    background: rgba(248,247,244,0.92);
+    backdrop-filter: blur(10px);
+    border-bottom: 1px solid var(--rule);
+    padding: 0 2rem;
+    display: flex; align-items: center; justify-content: space-between;
+    height: 60px;
+  }
+  .nav-brand {
+    font-family: var(--serif);
+    font-size: 1.1rem;
+    color: var(--ink);
+    text-decoration: none;
+    letter-spacing: -0.02em;
+  }
+  .nav-links { display: flex; gap: 2rem; list-style: none; }
+  .nav-links a {
+    font-size: 0.82rem; font-weight: 500; letter-spacing: 0.08em;
+    text-transform: uppercase; color: var(--ink-light); text-decoration: none;
+    transition: color 0.2s;
+  }
+  .nav-links a:hover { color: var(--accent); }
+
+  /* ── HERO ── */
+  #hero {
+    min-height: 100vh;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    align-items: center;
+    max-width: var(--max);
+    margin: 0 auto;
+    padding: 100px 2rem 4rem;
+    gap: 4rem;
+  }
+  .hero-text { animation: fadeUp 0.9s ease both; }
+  .hero-eyebrow {
+    font-size: 0.78rem; font-weight: 600; letter-spacing: 0.14em;
+    text-transform: uppercase; color: var(--accent);
+    margin-bottom: 1.2rem;
+  }
+  .hero-name {
+    font-family: var(--serif);
+    font-size: clamp(2.6rem, 5vw, 4rem);
+    line-height: 1.1;
+    letter-spacing: -0.03em;
+    color: var(--ink);
+    margin-bottom: 1rem;
+  }
+  .hero-name em { font-style: italic; color: var(--accent); }
+  .hero-tagline {
+    font-size: 1.05rem; color: var(--ink-light); line-height: 1.7;
+    margin-bottom: 2rem; max-width: 480px;
+  }
+  .hero-cta {
+    display: flex; gap: 1rem; flex-wrap: wrap;
+  }
+  .btn {
+    display: inline-flex; align-items: center; gap: 0.4rem;
+    padding: 0.7rem 1.6rem;
+    font-family: var(--sans); font-size: 0.85rem; font-weight: 600;
+    letter-spacing: 0.04em; text-decoration: none;
+    border-radius: 3px; transition: all 0.2s;
+  }
+  .btn-primary {
+    background: var(--accent); color: #fff;
+  }
+  .btn-primary:hover { background: #1340b0; transform: translateY(-1px); }
+  .btn-outline {
+    border: 1.5px solid var(--ink); color: var(--ink);
+  }
+  .btn-outline:hover { background: var(--ink); color: #fff; }
+
+  .hero-visual {
+    display: flex; flex-direction: column; gap: 1rem;
+    animation: fadeUp 0.9s 0.2s ease both;
+  }
+  .stat-grid {
+    display: grid; grid-template-columns: 1fr 1fr; gap: 1rem;
+  }
+  .stat-card {
+    background: var(--card-bg);
+    border: 1px solid var(--rule);
+    border-radius: 8px;
+    padding: 1.4rem 1.4rem 1rem;
+  }
+  .stat-num {
+    font-family: var(--serif); font-size: 2.4rem; line-height: 1;
+    color: var(--ink); letter-spacing: -0.04em;
+  }
+  .stat-num span { font-size: 1.2rem; color: var(--accent); }
+  .stat-label {
+    font-size: 0.78rem; color: var(--ink-muted); margin-top: 0.3rem;
+    font-weight: 500; text-transform: uppercase; letter-spacing: 0.08em;
+  }
+  .location-badge {
+    background: var(--card-bg); border: 1px solid var(--rule);
+    border-radius: 8px; padding: 1rem 1.4rem;
+    display: flex; align-items: center; gap: 0.7rem;
+    font-size: 0.88rem; color: var(--ink-light);
+  }
+  .location-dot { width: 8px; height: 8px; border-radius: 50%; background: #22c55e; flex-shrink: 0; }
+
+  /* ── SECTION BASE ── */
+  section { padding: 6rem 2rem; }
+  .container { max-width: var(--max); margin: 0 auto; }
+  .section-label {
+    font-size: 0.75rem; font-weight: 600; letter-spacing: 0.14em;
+    text-transform: uppercase; color: var(--accent); margin-bottom: 0.6rem;
+  }
+  .section-title {
+    font-family: var(--serif); font-size: clamp(1.8rem, 3.5vw, 2.8rem);
+    letter-spacing: -0.03em; line-height: 1.15; color: var(--ink);
+    margin-bottom: 0.5rem;
+  }
+  .section-sub {
+    color: var(--ink-muted); font-size: 1rem; max-width: 520px;
+    margin-bottom: 3rem;
+  }
+  hr.rule { border: none; border-top: 1px solid var(--rule); margin: 0 0 3rem; }
+
+  /* ── ABOUT ── */
+  #about { background: var(--card-bg); }
+  .about-grid {
+    display: grid; grid-template-columns: 1fr 1.4fr; gap: 5rem; align-items: start;
+  }
+  .about-left {}
+  .about-bio { font-size: 1rem; color: var(--ink-light); line-height: 1.8; margin-bottom: 1.5rem; }
+  .contact-list { list-style: none; display: flex; flex-direction: column; gap: 0.7rem; }
+  .contact-list li { display: flex; align-items: center; gap: 0.6rem; font-size: 0.88rem; color: var(--ink-light); }
+  .contact-list a { color: var(--accent); text-decoration: none; }
+  .contact-list a:hover { text-decoration: underline; }
+  .contact-icon { font-size: 1rem; width: 20px; }
+
+  .interests-grid { display: flex; flex-wrap: wrap; gap: 0.5rem; }
+  .tag {
+    background: var(--bg-alt); border: 1px solid var(--rule);
+    border-radius: 3px; padding: 0.3rem 0.75rem;
+    font-size: 0.78rem; font-weight: 500; color: var(--ink-light);
+    letter-spacing: 0.02em;
+  }
+
+  /* ── EXPERIENCE ── */
+  #experience { background: var(--bg); }
+  .timeline { display: flex; flex-direction: column; gap: 0; }
+  .timeline-item {
+    display: grid; grid-template-columns: 180px 1fr;
+    gap: 2rem; padding: 2rem 0;
+    border-bottom: 1px solid var(--rule);
+    opacity: 0; transform: translateY(20px);
+    transition: opacity 0.5s ease, transform 0.5s ease;
+  }
+  .timeline-item.visible { opacity: 1; transform: none; }
+  .timeline-item:first-child { padding-top: 0; }
+  .timeline-date { font-size: 0.82rem; color: var(--ink-muted); font-weight: 500; padding-top: 4px; }
+  .timeline-role { font-family: var(--serif); font-size: 1.15rem; color: var(--ink); margin-bottom: 0.2rem; }
+  .timeline-org { font-size: 0.88rem; color: var(--accent); font-weight: 500; margin-bottom: 0.5rem; }
+  .timeline-desc { font-size: 0.9rem; color: var(--ink-light); line-height: 1.6; }
+
+  /* ── RESEARCH ── */
+  #research { background: var(--ink); color: #fff; }
+  #research .section-title { color: #fff; }
+  #research .section-sub { color: #9aa0b5; }
+  #research .section-label { color: #6b8af0; }
+  .projects-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(300px, 1fr)); gap: 1rem; }
+  .project-card {
+    background: rgba(255,255,255,0.05);
+    border: 1px solid rgba(255,255,255,0.1);
+    border-radius: 8px; padding: 1.5rem;
+    transition: background 0.2s, border-color 0.2s;
+  }
+  .project-card:hover { background: rgba(255,255,255,0.09); border-color: rgba(255,255,255,0.2); }
+  .project-card p { font-size: 0.88rem; color: #9aa0b5; line-height: 1.6; }
+  .project-title { font-family: var(--serif); font-size: 0.98rem; color: #fff; margin-bottom: 0.5rem; line-height: 1.35; }
+
+  /* ── TAPEOUTS ── */
+  #tapeouts { background: var(--bg-alt); }
+  .tapeout-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 1.5rem; }
+  .tapeout-card {
+    background: var(--card-bg); border: 1px solid var(--rule);
+    border-radius: 8px; padding: 2rem 1.5rem;
+    position: relative; overflow: hidden;
+  }
+  .tapeout-card::before {
+    content: attr(data-num);
+    position: absolute; top: -10px; right: 16px;
+    font-family: var(--serif); font-size: 5rem; font-weight: 700;
+    color: var(--bg-alt); line-height: 1;
+    z-index: 0; pointer-events: none;
+  }
+  .tapeout-card > * { position: relative; z-index: 1; }
+  .tapeout-process {
+    font-size: 0.75rem; font-weight: 700; letter-spacing: 0.12em;
+    text-transform: uppercase; color: var(--accent); margin-bottom: 0.5rem;
+  }
+  .tapeout-title { font-family: var(--serif); font-size: 1.05rem; color: var(--ink); margin-bottom: 0.4rem; }
+  .tapeout-date { font-size: 0.8rem; color: var(--ink-muted); margin-bottom: 0.8rem; }
+  .tapeout-desc { font-size: 0.85rem; color: var(--ink-light); line-height: 1.6; }
+
+  /* ── PUBLICATIONS ── */
+  #publications { background: var(--card-bg); }
+  .pub-list { display: flex; flex-direction: column; gap: 0; }
+  .pub-item {
+    padding: 1.5rem 0;
+    border-bottom: 1px solid var(--rule);
+    display: grid; grid-template-columns: auto 1fr;
+    gap: 1.2rem; align-items: start;
+    opacity: 0; transform: translateY(16px);
+    transition: opacity 0.4s ease, transform 0.4s ease;
+  }
+  .pub-item.visible { opacity: 1; transform: none; }
+  .pub-year {
+    font-size: 0.75rem; font-weight: 600; color: var(--ink-muted);
+    letter-spacing: 0.06em; padding-top: 3px; min-width: 40px;
+  }
+  .pub-title { font-size: 0.92rem; color: var(--ink); line-height: 1.5; margin-bottom: 0.25rem; font-weight: 500; }
+  .pub-venue { font-size: 0.82rem; color: var(--ink-muted); font-style: italic; }
+  .pub-badge {
+    display: inline-block; margin-left: 0.5rem;
+    font-size: 0.68rem; font-weight: 600; padding: 0.15rem 0.4rem;
+    border-radius: 2px; text-transform: uppercase; letter-spacing: 0.06em;
+    background: #fef3c7; color: #b45309; vertical-align: middle;
+  }
+
+  /* ── SKILLS ── */
+  #skills { background: var(--bg); }
+  .skills-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(260px, 1fr)); gap: 1.5rem; }
+  .skill-group {
+    background: var(--card-bg); border: 1px solid var(--rule);
+    border-radius: 8px; padding: 1.5rem;
+  }
+  .skill-group-title {
+    font-size: 0.75rem; font-weight: 600; letter-spacing: 0.1em;
+    text-transform: uppercase; color: var(--accent); margin-bottom: 1rem;
+  }
+  .skill-list { display: flex; flex-wrap: wrap; gap: 0.4rem; }
+
+  /* ── EDUCATION ── */
+  #education { background: var(--card-bg); }
+  .edu-list { display: flex; flex-direction: column; gap: 1.5rem; }
+  .edu-item {
+    display: grid; grid-template-columns: 90px 1fr;
+    gap: 1.5rem; padding: 1.5rem;
+    background: var(--bg); border-radius: 8px;
+    border: 1px solid var(--rule);
+  }
+  .edu-degree {
+    font-family: var(--serif); font-size: 1.5rem; color: var(--accent);
+    line-height: 1; padding-top: 4px;
+  }
+  .edu-field { font-size: 1rem; font-weight: 500; color: var(--ink); margin-bottom: 0.2rem; }
+  .edu-inst { font-size: 0.88rem; color: var(--ink-light); margin-bottom: 0.2rem; }
+  .edu-period { font-size: 0.8rem; color: var(--ink-muted); }
+
+  /* ── FUNDING ── */
+  #funding { background: var(--bg-alt); }
+  .funding-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 1.5rem; }
+  .funding-card {
+    background: var(--card-bg); border: 1px solid var(--rule);
+    border-radius: 8px; padding: 1.8rem;
+  }
+  .funding-amount {
+    font-family: var(--serif); font-size: 2rem; color: var(--accent);
+    letter-spacing: -0.03em; margin-bottom: 0.3rem;
+  }
+  .funding-project { font-size: 0.92rem; font-weight: 500; color: var(--ink); margin-bottom: 0.5rem; line-height: 1.4; }
+  .funding-body { font-size: 0.82rem; color: var(--ink-muted); margin-bottom: 0.5rem; }
+  .funding-status {
+    display: inline-block; font-size: 0.72rem; font-weight: 600;
+    padding: 0.2rem 0.55rem; border-radius: 2px;
+    text-transform: uppercase; letter-spacing: 0.06em;
+    background: #dcfce7; color: #15803d;
+  }
+  .funding-status.review { background: #fef9c3; color: #854d0e; }
+
+  /* ── CONTACT ── */
+  #contact { background: var(--ink); color: #fff; text-align: center; }
+  #contact .section-title { color: #fff; }
+  #contact .section-sub { color: #9aa0b5; margin: 0 auto 2.5rem; }
+  #contact .section-label { color: #6b8af0; }
+  .contact-links {
+    display: flex; gap: 1rem; justify-content: center; flex-wrap: wrap;
+  }
+  .contact-link {
+    display: inline-flex; align-items: center; gap: 0.5rem;
+    padding: 0.8rem 1.6rem; border-radius: 4px;
+    font-size: 0.88rem; font-weight: 500;
+    text-decoration: none; transition: all 0.2s;
+    border: 1px solid rgba(255,255,255,0.15); color: #fff;
+  }
+  .contact-link:hover { background: rgba(255,255,255,0.08); border-color: rgba(255,255,255,0.3); }
+
+  /* ── FOOTER ── */
+  footer {
+    background: var(--ink); border-top: 1px solid rgba(255,255,255,0.08);
+    text-align: center; padding: 1.5rem 2rem;
+    font-size: 0.78rem; color: #4a5068;
+  }
+
+  /* ── ANIMATIONS ── */
+  @keyframes fadeUp {
+    from { opacity: 0; transform: translateY(30px); }
+    to   { opacity: 1; transform: none; }
+  }
+
+  /* ── RESPONSIVE ── */
+  @media (max-width: 768px) {
+    #hero { grid-template-columns: 1fr; gap: 3rem; }
+    .about-grid { grid-template-columns: 1fr; gap: 2rem; }
+    .tapeout-grid { grid-template-columns: 1fr; }
+    .funding-grid { grid-template-columns: 1fr; }
+    .timeline-item { grid-template-columns: 1fr; gap: 0.3rem; }
+    .edu-item { grid-template-columns: 1fr; gap: 0.5rem; }
+    .nav-links { display: none; }
+  }
+</style>
+</head>
+<body>
+
+<!-- NAV -->
+<nav>
+  <a href="#hero" class="nav-brand">M. Masood Sarfraz</a>
+  <ul class="nav-links">
+    <li><a href="#about">About</a></li>
+    <li><a href="#experience">Experience</a></li>
+    <li><a href="#research">Research</a></li>
+    <li><a href="#publications">Publications</a></li>
+    <li><a href="#skills">Skills</a></li>
+    <li><a href="#contact">Contact</a></li>
+  </ul>
+</nav>
+
+<!-- HERO -->
+<section id="hero">
+  <div class="hero-text">
+    <div class="hero-eyebrow">Lecturer & Analog IC Design Engineer</div>
+    <h1 class="hero-name">Muhammad<br><em>Masood</em><br>Sarfraz</h1>
+    <p class="hero-tagline">PhD in Microelectronics with 10+ years of teaching and 6 years of research expertise in analog and mixed-signal integrated circuit design, chip tape-outs, and AI-enabled electronic systems.</p>
+    <div class="hero-cta">
+      <a href="mailto:muhammad4453@outlook.com" class="btn btn-primary">Get in Touch</a>
+      <a href="https://scholar.google.com.pk/citations?user=hVdEfsQAAAAJ&hl=en" target="_blank" class="btn btn-outline">Google Scholar</a>
+    </div>
+  </div>
+  <div class="hero-visual">
+    <div class="stat-grid">
+      <div class="stat-card">
+        <div class="stat-num">10<span>+</span></div>
+        <div class="stat-label">Years Teaching</div>
+      </div>
+      <div class="stat-card">
+        <div class="stat-num">3</div>
+        <div class="stat-label">Chip Tape-outs</div>
+      </div>
+      <div class="stat-card">
+        <div class="stat-num">12<span>+</span></div>
+        <div class="stat-label">Publications</div>
+      </div>
+      <div class="stat-card">
+        <div class="stat-num">1</div>
+        <div class="stat-label">Patent (2026)</div>
+      </div>
+    </div>
+    <div class="location-badge">
+      <div class="location-dot"></div>
+      SETU, Waterford, Ireland — Currently Available
+    </div>
+  </div>
+</section>
+
+<!-- ABOUT -->
+<section id="about">
+  <div class="container">
+    <div class="section-label">Background</div>
+    <h2 class="section-title">About Me</h2>
+    <hr class="rule"/>
+    <div class="about-grid">
+      <div class="about-left">
+        <p class="about-bio">I am an Assistant Lecturer at South East Technological University (SETU), Ireland, with a PhD in Microelectronics from the University of Chinese Academy of Sciences. My work spans analog/mixed-signal IC design, power electronics, RF circuits, and AI-enabled systems.</p>
+        <p class="about-bio">I bring hands-on expertise across the full IC design lifecycle — from schematic entry and simulation to layout, verification, and chip measurement — backed by three successful tape-outs in TSMC 65nm and GlobalFoundries 130nm SiGe BiCMOS processes.</p>
+        <ul class="contact-list" style="margin-top:1.5rem;">
+          <li><span class="contact-icon">✉</span> <a href="mailto:muhammad4453@outlook.com">muhammad4453@outlook.com</a></li>
+          <li><span class="contact-icon">📞</span> +353-870350032</li>
+          <li><span class="contact-icon">📍</span> SETU, School of Engineering &amp; Technology, Ireland</li>
+          <li><span class="contact-icon">🔗</span> <a href="https://www.linkedin.com/in/masood4453/" target="_blank">linkedin.com/in/masood4453</a></li>
+          <li><span class="contact-icon">🎓</span> <a href="https://scholar.google.com.pk/citations?user=hVdEfsQAAAAJ&hl=en" target="_blank">Google Scholar Profile</a></li>
+        </ul>
+      </div>
+      <div>
+        <div class="section-label" style="margin-bottom:1rem;">Research Interests</div>
+        <div class="interests-grid" style="margin-bottom:2.5rem;">
+          <span class="tag">Analog &amp; Mixed-Signal IC Design</span>
+          <span class="tag">Power Electronics &amp; DC-DC Converters</span>
+          <span class="tag">Time-Based Control Systems</span>
+          <span class="tag">RF &amp; mm-Wave Circuits</span>
+          <span class="tag">Class-D Audio Amplifiers</span>
+          <span class="tag">AI-Enabled Electronic Systems</span>
+          <span class="tag">Intelligent Sensing &amp; Medical Devices</span>
+          <span class="tag">Electronics Modelling &amp; Simulation</span>
+        </div>
+        <div class="section-label" style="margin-bottom:1rem;">Memberships</div>
+        <div class="interests-grid">
+          <span class="tag">Registered Engineer – PEC</span>
+          <span class="tag">IAEEEE Member</span>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- EXPERIENCE -->
+<section id="experience">
+  <div class="container">
+    <div class="section-label">Career</div>
+    <h2 class="section-title">Professional Experience</h2>
+    <p class="section-sub">Over 15 years spanning academia and research across five countries.</p>
+    <hr class="rule"/>
+    <div class="timeline">
+      <div class="timeline-item">
+        <div class="timeline-date">Jan 2025 – Present</div>
+        <div>
+          <div class="timeline-role">Assistant Lecturer</div>
+          <div class="timeline-org">South East Technological University, Ireland</div>
+          <div class="timeline-desc">Teaching Microelectronics, Industrial Electronics, Analog Circuit Design, Analogue &amp; Digital Electronics. Module coordinator and student supervision.</div>
+        </div>
+      </div>
+      <div class="timeline-item">
+        <div class="timeline-date">Nov 2022 – Dec 2024</div>
+        <div>
+          <div class="timeline-role">Postdoctoral Researcher</div>
+          <div class="timeline-org">Technical University of Denmark (DTU), Denmark</div>
+          <div class="timeline-desc">Research in time-based PID control for Class-D audio amplifiers and high-frequency buck converters. Teaching Integrated Circuit II &amp; III courses. Supervision of BS and special course projects.</div>
+        </div>
+      </div>
+      <div class="timeline-item">
+        <div class="timeline-date">Sep 2017 – Sep 2022</div>
+        <div>
+          <div class="timeline-role">Assistant Professor</div>
+          <div class="timeline-org">COMSATS University Islamabad, Pakistan</div>
+          <div class="timeline-desc">Teaching undergraduate and graduate courses including RF Electronics, Power Electronics, Advance Power Electronics, and Circuit Analysis. Member of Final Year Project Committee, Convener Industrial Visit Committee, In-charge Advanced Electronic Lab.</div>
+        </div>
+      </div>
+      <div class="timeline-item">
+        <div class="timeline-date">Sep 2014 – Sep 2017</div>
+        <div>
+          <div class="timeline-role">Research Assistant (PhD)</div>
+          <div class="timeline-org">Institute of Microelectronics, UCAS, Beijing, China</div>
+          <div class="timeline-desc">PhD research on mm-Wave SiGe BiCMOS digital step attenuators, phase shifters, VCOs, and LNAs. Led two successful chip tape-outs in GF 130nm SiGe BiCMOS technology.</div>
+        </div>
+      </div>
+      <div class="timeline-item">
+        <div class="timeline-date">Feb 2011 – Sep 2014</div>
+        <div>
+          <div class="timeline-role">Lecturer</div>
+          <div class="timeline-org">COMSATS IIT Islamabad, Pakistan</div>
+          <div class="timeline-desc">Delivered courses in Electronics-I, Circuit Analysis, and MATLAB. In-charge of Project Lab.</div>
+        </div>
+      </div>
+      <div class="timeline-item">
+        <div class="timeline-date">Feb 2008 – Jan 2009</div>
+        <div>
+          <div class="timeline-role">Lecturer</div>
+          <div class="timeline-org">COMSATS IIT Islamabad, Pakistan</div>
+          <div class="timeline-desc">Teaching Introduction to Programming and Electronics courses at undergraduate level.</div>
+        </div>
+      </div>
+      <div class="timeline-item">
+        <div class="timeline-date">Aug 2007 – Feb 2008</div>
+        <div>
+          <div class="timeline-role">BSS Engineer</div>
+          <div class="timeline-org">TeleCard Ltd., Faisalabad, Pakistan</div>
+          <div class="timeline-desc">Base Station Subsystem engineering in the telecommunications sector.</div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- RESEARCH PROJECTS -->
+<section id="research">
+  <div class="container">
+    <div class="section-label">Projects</div>
+    <h2 class="section-title">Research Projects</h2>
+    <p class="section-sub">Key research areas spanning mm-Wave ICs, power conversion, and 5G phased-array systems.</p>
+    <div class="projects-grid">
+      <div class="project-card">
+        <div class="project-title">Time-Based PID Controller for Class-D Audio Power Amplification</div>
+        <p>Developed time-based PI control for advanced PWM generation in high-frequency buck converters, minimising output ripple voltage.</p>
+      </div>
+      <div class="project-card">
+        <div class="project-title">27–39 GHz Dual-Band Differential VCO for Mobile 5G</div>
+        <p>Bandwidth-enhanced differential LC-VCO and quadrature VCO supporting non-harmonically-related frequency bands in 0.13μm BiCMOS.</p>
+      </div>
+      <div class="project-card">
+        <div class="project-title">6-bit K-Band SiGe BiCMOS Digital Step Attenuator</div>
+        <p>A 6-bit 0.13μm SiGe BiCMOS DSA with low phase variation for K-band and Ka-band applications, with full tape-out verification.</p>
+      </div>
+      <div class="project-card">
+        <div class="project-title">6-bit 38 GHz SiGe BiCMOS Phase Shifter for 5G</div>
+        <p>High-precision phase shifter targeting 5G phased-array communication systems, designed and verified in IEICE Electronics Express.</p>
+      </div>
+      <div class="project-card">
+        <div class="project-title">CMOS Dual-Feedback Reconfigurable LNA</div>
+        <p>Low noise amplifier with improved stability and reduced noise figure using dual-feedback reconfigurable topology in CMOS process.</p>
+      </div>
+      <div class="project-card">
+        <div class="project-title">5-bit SOI CMOS Digital Step Attenuator</div>
+        <p>Silicon-on-insulator CMOS DSA design targeting high-frequency switching and low insertion loss for RF front-end applications.</p>
+      </div>
+      <div class="project-card">
+        <div class="project-title">AI-Enabled Captioning System for Visually Impaired</div>
+        <p>Real-time captioning and computer vision assistive system for blind and visually impaired persons — filed as a patent in 2026.</p>
+      </div>
+      <div class="project-card">
+        <div class="project-title">Geo-Aware RAG Chatbot for Walking Support</div>
+        <p>Prototype retrieval-augmented chatbot with geospatial awareness presented at ICHCAI 2026, Norway.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- CHIP TAPEOUTS -->
+<section id="tapeouts">
+  <div class="container">
+    <div class="section-label">Silicon</div>
+    <h2 class="section-title">Completed Chip Tape-outs</h2>
+    <p class="section-sub">End-to-end IC design experience from schematic through layout, DRC/LVS, and measurement.</p>
+    <hr class="rule"/>
+    <div class="tapeout-grid">
+      <div class="tapeout-card" data-num="3">
+        <div class="tapeout-process">TSMC 65nm</div>
+        <div class="tapeout-title">Class-D Audio Amplifier Application</div>
+        <div class="tapeout-date">22 May 2024</div>
+        <div class="tapeout-desc">Design and verification of VCO, Delay Cell, and Phase Frequency Detector for time-based audio power amplification.</div>
+      </div>
+      <div class="tapeout-card" data-num="2">
+        <div class="tapeout-process">GF SiGe BiCMOS 130nm</div>
+        <div class="tapeout-title">mm-Wave Application</div>
+        <div class="tapeout-date">05 Nov 2017</div>
+        <div class="tapeout-desc">Design and verification of OpAmp and Filter blocks targeting millimetre-wave frequency operation.</div>
+      </div>
+      <div class="tapeout-card" data-num="1">
+        <div class="tapeout-process">GF SiGe BiCMOS 130nm</div>
+        <div class="tapeout-title">mm-Wave Application</div>
+        <div class="tapeout-date">13 Aug 2016</div>
+        <div class="tapeout-desc">First tape-out — OpAmp and Filter design and verification for K-band and Ka-band mm-Wave applications.</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- PUBLICATIONS -->
+<section id="publications">
+  <div class="container">
+    <div class="section-label">Scholarly Output</div>
+    <h2 class="section-title">Publications</h2>
+    <p class="section-sub">Journal articles, conference papers, and a patent spanning IC design, RF, and AI systems.</p>
+    <hr class="rule"/>
+    <div class="pub-list">
+      <div class="pub-item">
+        <div class="pub-year">2026</div>
+        <div>
+          <div class="pub-title">Causal Shape Attribution for Boundary-Aware Brain Tumor Segmentation <span class="pub-badge">In Review</span></div>
+          <div class="pub-venue">IEEE Transactions on Industrial Electronics — Bouchelligua, Nasir, Arshad, Sarfraz et al.</div>
+        </div>
+      </div>
+      <div class="pub-item">
+        <div class="pub-year">2026</div>
+        <div>
+          <div class="pub-title">AI-Enabled Real-Time Captioning and Computer Vision Assistive System for Blind and Visually Impaired Persons <span class="pub-badge">Patent</span></div>
+          <div class="pub-venue">Published Patent, 2026</div>
+        </div>
+      </div>
+      <div class="pub-item">
+        <div class="pub-year">2026</div>
+        <div>
+          <div class="pub-title">A Geo-Aware Retrieval-Augmented Chatbot Prototype for Walking Support <span class="pub-badge">Accepted</span></div>
+          <div class="pub-venue">1st International Conference on Human Centric AI (ICHCAI 2026), Norway</div>
+        </div>
+      </div>
+      <div class="pub-item">
+        <div class="pub-year">2026</div>
+        <div>
+          <div class="pub-title">Performance Optimization of Cs₂BiAgI₆ Perovskite Solar Cells through Thickness Tuning, Doping Density Control, and Electron Affinity Engineering <span class="pub-badge">In Review</span></div>
+          <div class="pub-venue">Materials in Electronics — Ullah, Mustafa, Anwar, Sarfraz et al.</div>
+        </div>
+      </div>
+      <div class="pub-item">
+        <div class="pub-year">2024</div>
+        <div>
+          <div class="pub-title">Time-Based PI Control for Advanced PWM Generation in High Frequency Buck Converters with Minimising Output Ripple Voltage</div>
+          <div class="pub-venue">IEEE International Symposium on Electrical, Electronics and Information Engineering, UK — Sarfraz &amp; Andersen</div>
+        </div>
+      </div>
+      <div class="pub-item">
+        <div class="pub-year">2018</div>
+        <div>
+          <div class="pub-title">A 6-bit 0.13μm SiGe BiCMOS Digital Step Attenuator with Low Phase Variation for K-band Applications</div>
+          <div class="pub-venue">MDPI Electronics — Sarfraz, Ullah, Wang, Zhang, Liu</div>
+        </div>
+      </div>
+      <div class="pub-item">
+        <div class="pub-year">2018</div>
+        <div>
+          <div class="pub-title">Bandwidth-Enhanced Differential VCO and Varactor-Coupled Quadrature VCO for mmWave Applications</div>
+          <div class="pub-venue">International Journal of Electronics and Communications — Ullah, Liu, Wang, Sarfraz et al.</div>
+        </div>
+      </div>
+      <div class="pub-item">
+        <div class="pub-year">2018</div>
+        <div>
+          <div class="pub-title">A Wideband Tunable VCO Supporting Non-Harmonically-Related Multiple Frequency Bands for Future 5G Applications</div>
+          <div class="pub-venue">IEEE International Conference on Integrated Circuits and Microsystems, Shanghai</div>
+        </div>
+      </div>
+      <div class="pub-item">
+        <div class="pub-year">2018</div>
+        <div>
+          <div class="pub-title">Object Detection and Classification: A Joint Selection and Fusion Strategy of Deep CNN and SIFT Point Features</div>
+          <div class="pub-venue">Computers and Electrical Engineering Journal</div>
+        </div>
+      </div>
+      <div class="pub-item">
+        <div class="pub-year">2017</div>
+        <div>
+          <div class="pub-title">4-bit Ka Band SiGe BiCMOS Digital Step Attenuator</div>
+          <div class="pub-venue">Progress in Electromagnetics Research C, Vol. 74, 31–40 — Sarfraz, Liu, Ullah et al.</div>
+        </div>
+      </div>
+      <div class="pub-item">
+        <div class="pub-year">2017</div>
+        <div>
+          <div class="pub-title">A 6-bit 38 GHz SiGe BiCMOS Phase Shifter for 5G Phased Array Communications</div>
+          <div class="pub-venue">IEICE Electronics Express — Wang, Liu, Li, Wang, Sarfraz et al.</div>
+        </div>
+      </div>
+      <div class="pub-item">
+        <div class="pub-year">2017</div>
+        <div>
+          <div class="pub-title">A CMOS Dual-Feedback Reconfigurable Low Noise Amplifier with Improved Stability and Reduced Noise</div>
+          <div class="pub-venue">IEICE Electronics Express — Wang, Liu, Sarfraz et al.</div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- SKILLS -->
+<section id="skills">
+  <div class="container">
+    <div class="section-label">Expertise</div>
+    <h2 class="section-title">Technical Skills</h2>
+    <p class="section-sub">End-to-end IC design capability from behavioural modelling through tape-out and lab measurement.</p>
+    <hr class="rule"/>
+    <div class="skills-grid">
+      <div class="skill-group">
+        <div class="skill-group-title">EDA Tools</div>
+        <div class="skill-list">
+          <span class="tag">Cadence Virtuoso IC5/IC6/6.1.8</span>
+          <span class="tag">Spectre</span>
+          <span class="tag">HSpice</span>
+          <span class="tag">Calibre DRC/LVS/PEX</span>
+          <span class="tag">PeakView EM</span>
+          <span class="tag">Mentor Graphics</span>
+          <span class="tag">Altium Designer</span>
+        </div>
+      </div>
+      <div class="skill-group">
+        <div class="skill-group-title">IC Processes</div>
+        <div class="skill-list">
+          <span class="tag">TSMC 65nm</span>
+          <span class="tag">TSMC 90nm</span>
+          <span class="tag">GF 130nm SiGe BiCMOS 8HP/8XP</span>
+          <span class="tag">Xfab 180nm</span>
+        </div>
+      </div>
+      <div class="skill-group">
+        <div class="skill-group-title">IC Design</div>
+        <div class="skill-list">
+          <span class="tag">Analog Circuit Design</span>
+          <span class="tag">Mixed-Signal Design</span>
+          <span class="tag">RF / mm-Wave</span>
+          <span class="tag">VCO / PLL</span>
+          <span class="tag">LNA</span>
+          <span class="tag">Power Amplifiers</span>
+          <span class="tag">Layout & Verification</span>
+        </div>
+      </div>
+      <div class="skill-group">
+        <div class="skill-group-title">Lab & Measurement</div>
+        <div class="skill-list">
+          <span class="tag">Agilent PNA (10 MHz–67 GHz)</span>
+          <span class="tag">Cascade Microtech GSG Probe</span>
+          <span class="tag">Network Analysis</span>
+          <span class="tag">S-Parameter Measurement</span>
+        </div>
+      </div>
+      <div class="skill-group">
+        <div class="skill-group-title">Teaching Areas</div>
+        <div class="skill-list">
+          <span class="tag">Analog Electronics</span>
+          <span class="tag">Digital Electronics</span>
+          <span class="tag">Microelectronics</span>
+          <span class="tag">Power Electronics</span>
+          <span class="tag">RF Electronics</span>
+          <span class="tag">Circuit Analysis</span>
+          <span class="tag">MATLAB</span>
+        </div>
+      </div>
+      <div class="skill-group">
+        <div class="skill-group-title">Certifications</div>
+        <div class="skill-list">
+          <span class="tag">Cadence Virtuoso Layout Design (2024)</span>
+          <span class="tag">GDPR Fundamentals (2026)</span>
+          <span class="tag">Teaching & Assessment (2026)</span>
+          <span class="tag">Export Control Policy (2025)</span>
+          <span class="tag">Risk Assessment (2025)</span>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- EDUCATION -->
+<section id="education">
+  <div class="container">
+    <div class="section-label">Qualifications</div>
+    <h2 class="section-title">Education</h2>
+    <hr class="rule"/>
+    <div class="edu-list">
+      <div class="edu-item">
+        <div class="edu-degree">Ph.D</div>
+        <div>
+          <div class="edu-field">Microelectronics &amp; Solid-State Electronics</div>
+          <div class="edu-inst">University of Chinese Academy of Sciences (UCAS), Beijing, China</div>
+          <div class="edu-period">2014 – 2018 · CAS-TWAS President's Fellowship (¥384,000 RMB)</div>
+        </div>
+      </div>
+      <div class="edu-item">
+        <div class="edu-degree">MS</div>
+        <div>
+          <div class="edu-field">Electronics Design</div>
+          <div class="edu-inst">Mid Sweden University, Sweden</div>
+          <div class="edu-period">2009 – 2011</div>
+        </div>
+      </div>
+      <div class="edu-item">
+        <div class="edu-degree">BE</div>
+        <div>
+          <div class="edu-field">Electronics Engineering</div>
+          <div class="edu-inst">Mehran University of Engineering and Technology, Jamshoro, Pakistan</div>
+          <div class="edu-period">2003 – 2007</div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- FUNDING -->
+<section id="funding">
+  <div class="container">
+    <div class="section-label">Grants</div>
+    <h2 class="section-title">Research Funding</h2>
+    <hr class="rule"/>
+    <div class="funding-grid">
+      <div class="funding-card">
+        <div class="funding-amount">€11,500</div>
+        <div class="funding-project">AI-Enhanced Computer-Aided Diagnosis Platform for Early Detection and Classification of Skin and Gastrointestinal Malignancies</div>
+        <div class="funding-body">Prince Sattam Bin Abdulaziz University · Interdisciplinary Research Support Program</div>
+        <span class="funding-status">Approved</span>
+      </div>
+      <div class="funding-card">
+        <div class="funding-amount">TBD</div>
+        <div class="funding-project">Development and Optimization of AI-Enhanced High-Frequency Power Converters for Next-Generation Energy Systems</div>
+        <div class="funding-body">Government of Ireland · Postgraduate Scholarship Programme</div>
+        <span class="funding-status review">Endorsed &amp; In Review</span>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- CONTACT -->
+<section id="contact">
+  <div class="container">
+    <div class="section-label">Get in Touch</div>
+    <h2 class="section-title">Let's Connect</h2>
+    <p class="section-sub">Open to research collaborations, academic opportunities, and IC design consultancy.</p>
+    <div class="contact-links">
+      <a href="mailto:muhammad4453@outlook.com" class="contact-link">✉ muhammad4453@outlook.com</a>
+      <a href="https://www.linkedin.com/in/masood4453/" target="_blank" class="contact-link">🔗 LinkedIn</a>
+      <a href="https://scholar.google.com.pk/citations?user=hVdEfsQAAAAJ&hl=en" target="_blank" class="contact-link">🎓 Google Scholar</a>
+      <a href="tel:+353870350032" class="contact-link">📞 +353-870350032</a>
+    </div>
+  </div>
+</section>
+
+<footer>
+  © 2026 Muhammad Masood Sarfraz · SETU, Ireland · Built with care
+</footer>
+
+<script>
+  // Scroll-triggered animations
+  const observer = new IntersectionObserver((entries) => {
+    entries.forEach((entry, i) => {
+      if (entry.isIntersecting) {
+        setTimeout(() => entry.target.classList.add('visible'), i * 80);
+        observer.unobserve(entry.target);
+      }
+    });
+  }, { threshold: 0.1 });
+
+  document.querySelectorAll('.timeline-item, .pub-item').forEach(el => observer.observe(el));
+</script>
+</body>
+</html>
